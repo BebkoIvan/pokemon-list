@@ -3,9 +3,12 @@
       <mat-card-title>{{pokemon.name | uppercase}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <img mat-card-image src="{{pokemon.sprites.front_default}}" alt="Fromt photo of a {{pokemon.name}}">
+        <img mat-card-image class="pokemon-card__image" src="{{pokemon.sprites.front_default || 'assets/images/russian_warship.jpg'}}" alt="Fromt photo of a {{pokemon.name}}">
+        <div *ngIf="withStats" class="pokemon-card__stats">
+            <span *ngFor="let stat of pokemon.stats">{{stat.stat.name}}: {{stat.base_stat}}</span>
+        </div>
     </mat-card-content>
     <mat-card-actions>
-        <mat-icon (click)="toggleFavorite(pokemon)">{{pokemon.favorite ? 'favorite' : 'favorite_outline'}}</mat-icon>
+        <mat-icon (click)="toggleFavorite($event, pokemon)">{{pokemon.favorite ? 'favorite' : 'favorite_outline'}}</mat-icon>
     </mat-card-actions>
 </mat-card>

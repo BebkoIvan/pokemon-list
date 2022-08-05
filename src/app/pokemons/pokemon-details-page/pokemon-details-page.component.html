@@ -1,0 +1,15 @@
+<div class="pokemon-details-page">
+    <button mat-button [routerLink]="['../../']"><mat-icon>arrow_back</mat-icon> Go to list</button>
+    <ng-container *ngIf="pokemon$ | async as pokemon; else loader">
+        <pkm-pokemon-card [withStats]="true" [pokemon]="pokemon"></pkm-pokemon-card>
+    </ng-container>
+</div>
+
+<ng-template #loader>
+    <mat-progress-spinner
+        color="accent"
+        mode="indeterminate">
+    </mat-progress-spinner>
+</ng-template>
+
+

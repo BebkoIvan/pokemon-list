@@ -8,19 +8,29 @@ import { PokemonsApiService } from './pokemons-api.service';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { PokemonDetailsPageComponent } from './pokemon-details-page/pokemon-details-page.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PokemonsFavoritesPageComponent } from './pokenons-favorites-page/pokemons-favorites-page.component';
 
 const routes: Routes = [
-  {path: '', component: PokemonsPageComponent}
+  { path: '', component: PokemonsPageComponent },
+  { path: 'details/:id', component: PokemonDetailsPageComponent},
+  { path: 'favorites', component: PokemonsFavoritesPageComponent}
 ];
 
 @NgModule({
   declarations: [
     PokemonCardComponent,
-    PokemonsPageComponent
+    PokemonsPageComponent,
+    PokemonDetailsPageComponent,
+    PokemonsFavoritesPageComponent
   ],
   imports: [
     CommonModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
     MatIconModule,
     MatCardModule,
     HttpClientModule,

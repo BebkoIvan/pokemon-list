@@ -1,4 +1,26 @@
-<div class="pokemons-list">
-    <pkm-pokemon-card *ngFor="let pokemon of pokemons$ | async" [pokemon]="pokemon"></pkm-pokemon-card>
+<div class="pokemons-subheader">
+    <button mat-button>Refresh <mat-icon (click)="refresh()">refresh</mat-icon></button>
+    <button mat-button [routerLink]="['favorites']">Go to favorites</button>
 </div>
+<div class="pokemons-list">
+    <ng-container *ngIf="pokemons$ | async as pokemons; else loader">
+        <pkm-pokemon-card [routerLink]="['details/' + pokemon.id]"  *ngFor="let pokemon of pokemons" [pokemon]="pokemon"></pkm-pokemon-card>
+    </ng-container>
+</div>
+<mat-paginator 
+    (page)="handlePageEvent($event)"
+    [length]="length"
+    [pageSize]="pageSize"
+    [showFirstLastButtons]="showFirstLastButtons"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="pageIndex"
+>
+</mat-paginator>
+
+<ng-template #loader>
+    <mat-progress-spinner
+        color="accent"
+        mode="indeterminate">
+    </mat-progress-spinner>
+</ng-template>
 

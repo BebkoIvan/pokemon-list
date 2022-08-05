@@ -1,4 +1,12 @@
 .pokemon-card {
-    max-width: 400px;
+    width: 300px;
     cursor: pointer;
+    mat-card-header {
+        margin-bottom: 20px;
+    }
+
+    &__stats {
+        display: flex;
+        flex-direction: column;
+    }
 }

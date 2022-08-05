@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Pokemon } from '../models';
 import { PokemonsMockStorageService } from '../pokemons-mock-storage.service';
 
@@ -12,13 +12,21 @@ export class PokemonCardComponent implements OnInit {
   @Input()
   pokemon!: Pokemon;
 
+  @Input() withStats = false;
+
+  @Output()
+  pokemonLikeToggle: EventEmitter<number> = new EventEmitter();
+
   constructor(private pokemonsStorage: PokemonsMockStorageService) { }
 
   ngOnInit(): void {
   }
 
-  toggleFavorite(pokemon: Pokemon) {
+  toggleFavorite(event: Event , pokemon: Pokemon) {
+    event.stopPropagation();
     pokemon.favorite = !pokemon.favorite; 
+    this.pokemonsStorage.toggleFavorite(String(pokemon.id));
+    this.pokemonLikeToggle.emit(pokemon.id);
   }
 
 }

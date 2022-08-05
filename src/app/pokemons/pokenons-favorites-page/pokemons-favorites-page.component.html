@@ -1,0 +1,17 @@
+<button mat-button [routerLink]="['../']"><mat-icon>arrow_back</mat-icon> Go to list</button>
+<div class="pokemons-list">
+    <ng-container *ngIf="pokemons;else loader">
+        <pkm-pokemon-card 
+            [routerLink]="['../details/' + pokemon.id]"
+            *ngFor="let pokemon of pokemons"
+            [pokemon]="pokemon"
+            (pokemonLikeToggle)="removeFromFavorite($event)"
+        ></pkm-pokemon-card>
+    </ng-container>
+</div>
+<ng-template #loader>
+    <mat-progress-spinner
+        color="accent"
+        mode="indeterminate">
+    </mat-progress-spinner>
+</ng-template>
